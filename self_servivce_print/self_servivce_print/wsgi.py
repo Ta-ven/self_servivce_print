@@ -1,5 +1,5 @@
 """
-WSGI config for self_servivce_print project.
+WSGI config for self_servivce_print web.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

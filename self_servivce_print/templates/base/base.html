@@ -24,13 +24,13 @@
 </ul>
 <ul class="layui-nav layui-layout-right">
   <li class="layui-nav-item">
-    <a href="javascript:;">用户名</a>
+    <a href="javascript:">用户名</a>
     <dl class="layui-nav-child">
       <dd><a href="">基本资料</a></dd>
       <dd><a href="">安全设置</a></dd>
     </dl>
   </li>
-  <li class="layui-nav-item"><a href="">退出登录</a></li>
+  <li class="layui-nav-item"><a href="/login.html">退出登录</a></li>
 </ul>
   </div>
 
@@ -46,17 +46,9 @@
             <dd {% block activity3 %} {% endblock %}><a href="/initial.html">初期阶段</a></dd>
             <dd {% block activity4 %} {% endblock %}><a href="/medium.html">中期阶段</a></dd>
             <dd {% block activity5 %} {% endblock %}><a href="/last.html">后期阶段</a></dd>
-            <dd {% block activity6 %} {% endblock %}><a href="">超链接</a></dd>
+            <dd {% block activity6 %} {% endblock %}><a href="/last.html">添加项目</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item">
-          <a href="javascript:;">我的成果</a>
-          <dl class="layui-nav-child">
-            <dd><a href="javascript:;">列表一</a></dd>
-            <dd><a href="javascript:;">列表二</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item"><a href="">超链接</a></li>
       </ul>
     </div>
   </div>
@@ -66,7 +58,6 @@
     <div style="padding: 15px;">
       {% block content %}
       {% endblock %}
-
     </div>
   </div>
 
@@ -82,7 +73,6 @@
 //JavaScript代码区域
 layui.use('element', function(){
   var element = layui.element;
-
 });
 </script>
 </body>

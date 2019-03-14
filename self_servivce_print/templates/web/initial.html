@@ -4,29 +4,45 @@
 {% block activity3 %}class='layui-this'{% endblock %}>
 
 {% block content %}
-    <table id="demo"></table>
+<table class="layui-table">
+    <colgroup>
+        <col width="60">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+        <col width="110">
+        <col width="450">
+        <col>
+  </colgroup>
+  <thead>
+    <tr>
+        <th >编号</th>
+        <th >项目名称</th>
+        <th >完成状态</th>
+        <th >负责人</th>
+        <th >项目时间</th>
+        <th >项目简介</th>
+        <th >备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for initial_proj in initial_projs %}
+        <tr>
+            <td>{{ initial_proj.id }}</td>
+            <td>{{ initial_proj.pro_name }}</td>
+            {% if  initial_proj.status == 1 %}
+                <td>初期</td>
+            {% endif %}
+            <td>{{ initial_proj.team_leader }}</td>
+            <td>{{ initial_proj.time.add_time|date:"Y-m-d"}}</td>
+            <td>{{ initial_proj.summary }}</td>
+            <td>{{ initial_proj.content.comments }}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
-{% block js %}
-<script>
-layui.use('table', function(){
-    var table = layui.table;
-    // 设置表结构
-    table.render({
-        elem: '#demo'
-        ,height: 500
-        ,url: '#' //数据接口
-        ,page: true //开启分页
-        ,cols: [[ //表头
-        {field: 'id', title: '编号', width:80, sort: true, fixed: 'left'},
-        {field: 'username', title: '负责人', width:80},
-        {field: 'status', title: '完成状态', width:90},
-        {field: 'content', title: '内容', width:700},
-        {field: 'remark', title: '备注', width:250},
-    ]]
-  });
-});
-</script>
-{% endblock %}
+
 
 
 

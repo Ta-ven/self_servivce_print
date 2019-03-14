@@ -18,11 +18,12 @@ from django.urls import path, include
 from web import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('home.html/', views.home, name='home.html/'),
+    path('admin/', admin.site.urls),
     path('allproject.html/', views.allproject, name='allproject.html/'),
     path('finish.html/', views.finish, name='finish.html/'),
     path('initial.html/', views.initial, name='initial.html/'),
     path('medium.html/', views.medium, name='medium.html/'),
     path('last.html/', views.last, name='last.html/'),
+    path('', include('status.urls')),
 ]

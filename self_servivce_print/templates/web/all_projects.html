@@ -1,7 +1,12 @@
 {% extends "base/base.html" %}
 
-{% block css %}{% endblock %}
-{% block activity1 %}class='layui-this'{% endblock %}>
+{% block css %}
+<link rel="stylesheet" href="/statics/bootstrap/css/bootstrap.css">
+{% endblock %}
+{% block activity %}
+    {% block activity1 %}class='layui-this'{% endblock %}>
+{% endblock %}
+
 
 {% block content %}
 <table class="layui-table">
@@ -26,30 +31,38 @@
     </tr>
   </thead>
   <tbody>
-    {% for project in all_proj %}
+    {% for proj in projects %}
         <tr>
-            <td>{{ project.id }}</td>
-            <td><a href="">{{ project.pro_name }}</a></td>
-            {% if  project.status == 4 %}
+            <td>{{ proj.id }}</td>
+            <td><a href="">{{ proj.pro_name }}</a></td>
+            {% if  proj.status == 4 %}
                 <td>完成</td>
-            {% elif  project.status == 1 %}
+            {% elif  proj.status == 1 %}
                 <td>初期</td>
-            {% elif  project.status == 2 %}
+            {% elif  proj.status == 2 %}
                 <td>中期</td>
-            {% elif  project.status == 3 %}
+            {% elif  proj.status == 3 %}
                 <td>后期</td>
             {% endif %}
-            <td>{{ project.team_leader }}</td>
-            <td>{{ project.time.add_time|date:"Y-m-d"}}</td>
-            <td>{{ project.summary }}</td>
-            <td>{{ project.content.comments }}</td>
+            <td>{{ proj.team_leader }}</td>
+            <td>{{ proj.time.add_time|date:"Y-m-d"}}</td>
+            <td>{{ proj.summary }}</td>
+            <td>{{ proj.content.comments }}</td>
         </tr>
     {% endfor %}
   </tbody>
 </table>
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+      <li>{{ obj.page_str|safe }}</li>
+  </ul>
+</nav>
+<div id="demo7"></div>
 {% endblock %}
+{% block js %}
+<script>
 
-
-
+</script>
+{% endblock %}
 
 

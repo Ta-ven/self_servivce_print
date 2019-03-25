@@ -16,9 +16,9 @@
     <!-- 头部区域 -->
 <ul class="layui-nav layui-layout-left">
   <nav class="navbar navbar-dark bg-#23262E">
-    <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button type="button" class="btn btn-dark">搜索</button>
+    <form class="form-inline" method="get">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+      <input type="submit" class="btn btn-dark" value="搜索">
     </form>
   </nav>
 </ul>
@@ -46,7 +46,7 @@
             <dd {% block activity3 %} {% endblock %}><a href="/initial.html">初期阶段</a></dd>
             <dd {% block activity4 %} {% endblock %}><a href="/medium.html">中期阶段</a></dd>
             <dd {% block activity5 %} {% endblock %}><a href="/last.html">后期阶段</a></dd>
-            <dd {% block activity6 %} {% endblock %}><a href="/last.html">添加项目</a></dd>
+            <dd {% block activity6 %} {% endblock %}><a href="/add.html">添加项目</a></dd>
           </dl>
         </li>
       </ul>

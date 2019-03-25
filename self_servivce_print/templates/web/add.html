@@ -1,0 +1,106 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/statics/bootstrap/css/bootstrap.min.css">
+{% endblock %}
+{% block activity6 %}class='layui-this'{% endblock %}>
+
+{% block content %}
+<form class="layui-form">
+  {%csrf_token%}
+  <div class="layui-form-item">
+    <label class="layui-form-label" style="width: 100px">项目名称</label>
+    <div class="layui-input-block">
+      <input type="text" name="pro_name" required  lay-verify="required" placeholder="请输入项目名称" autocomplete="off" class="layui-input">
+        <P style="color: red" id="pro_name_err"></P>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label" style="width: 100px">负责人</label>
+    <div class="layui-input-block" style="width: 200px">
+      <input type="text" name="team_leader" required  lay-verify="required" placeholder="请输入负责人名字" autocomplete="off" class="layui-input">
+        <P style="color: red" id="team_leader_err"></P>
+    </div>
+  </div>
+
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label" style="width: 100px">简介</label>
+    <div class="layui-input-block">
+      <textarea name="summary" style="height: 40px" placeholder="请输入内容" class="layui-textarea"></textarea>
+         <P style="color: red" id="summary_err"></P>
+    </div>
+  </div>
+    <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label" style="width: 100px">项目详情</label>
+    <div class="layui-input-block">
+      <textarea style="height: 150px" name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+         <P style="color: red" id="content_err"></P>
+    </div>
+  </div>
+    <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label" style="width: 100px">备注</label>
+    <div class="layui-input-block">
+      <textarea style="height: 50px" name="comments" placeholder="请输入内容" class="layui-textarea"></textarea>
+         <P style="color: red" id="comments_err"></P>
+    </div>
+  </div>
+</form>
+    <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" onclick="addsumbit()" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true" style="display: none">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">提示信息</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        添加成功！
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="javascrtpt:window.location.href='/add.html'">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="/statics/bootstrap/js/bootstrap.min.js"></script>
+<script>
+  function addsumbit() {
+    $.ajaxSetup({
+      data:{csrfmiddlewaretoken:'{{ csrf_token }}'},
+        });
+          $.ajax({
+            url:"/add.html/",
+            type:'POST',
+            dataType:"JSON",
+            data:$('.layui-form').serialize(),
+            success:function (args) {
+              if (args.status == true){
+                $('#exampleModalCenter').attr('class','modal fade in');
+                $('#exampleModalCenter').attr('style','display: block')
+              }else {
+                if (args.msg.pro_name){$('#pro_name_err').text(args.msg.pro_name)}
+                if (args.msg.pro_name){$('#team_leader_err').text(args.msg.team_leader)}
+                if (args.msg.pro_name){$('#summary_err').text(args.msg.summary)}
+                if (args.msg.pro_name){$('#content_err').text(args.msg.content)}
+                if (args.msg.pro_name){$('#comments_err').text(args.msg.comments)}
+              }
+        }
+    })
+  }
+</script>
+
+
+{% endblock %}

@@ -1,6 +1,8 @@
 {% extends "base/base.html" %}
 
-{% block css %}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/statics/bootstrap/css/bootstrap.css">
+{% endblock %}
 {% block activity3 %}class='layui-this'{% endblock %}>
 
 {% block content %}
@@ -26,21 +28,26 @@
     </tr>
   </thead>
   <tbody>
-    {% for initial_proj in initial_projs %}
+    {% for proj in projects %}
         <tr>
-            <td>{{ initial_proj.id }}</td>
-            <td>{{ initial_proj.pro_name }}</td>
-            {% if  initial_proj.status == 1 %}
+            <td>{{ proj.id }}</td>
+            <td>{{ proj.pro_name }}</td>
+            {% if  proj.status == 1 %}
                 <td>初期</td>
             {% endif %}
-            <td>{{ initial_proj.team_leader }}</td>
-            <td>{{ initial_proj.time.add_time|date:"Y-m-d"}}</td>
-            <td>{{ initial_proj.summary }}</td>
-            <td>{{ initial_proj.content.comments }}</td>
+            <td>{{ proj.team_leader }}</td>
+            <td>{{ proj.time.add_time|date:"Y-m-d"}}</td>
+            <td>{{ proj.summary }}</td>
+            <td>{{ proj.content.comments }}</td>
         </tr>
     {% endfor %}
   </tbody>
 </table>
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+      <li>{{ obj.page_str|safe }}</li>
+  </ul>
+</nav>
 {% endblock %}
 
 

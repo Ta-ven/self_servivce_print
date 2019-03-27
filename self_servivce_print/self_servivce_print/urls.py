@@ -3,7 +3,9 @@ from django.urls import path, include
 from web.views import home
 from web.views import find
 from web.views import add
-from web.views import test
+from web.views import see
+from web.views import delete
+from web.views import modify
 
 urlpatterns = [
     path('home.html/', home.home, name='home.html/'),
@@ -15,8 +17,9 @@ urlpatterns = [
     path('last.html/', find.last, name='last.html/'),
     path('search.html/', find.search, name='search.html/'),
     path('add.html/', add.add, name='add.html/'),
-    path('test.html/', test.test, name='test.html/'),
-
+    path('see.html/', see.see, name='see.html/'),
+    path('del.html/', delete.delete, name='del.html/'),
+    path('modify.html/', modify.modify, name='modify.html/'),
 
     path('', include('status.urls')),
 ]

@@ -1,9 +1,10 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render
 from django.db.models import Q
 from web.models import Project, Time
 from statics.pagination import Pagination
+from web.is_log_in import is_log_in
 
-
+@is_log_in
 def home(request):
     return render(request, 'base/base.html')
 
@@ -44,6 +45,7 @@ def searchs(fun,page,request):
     return count, projects
 
 # 装饰器   查询
+
 def search(fun):
     def inner(request, *args, **kwargs):
         page = request.GET.get('Page')
@@ -55,26 +57,34 @@ def search(fun):
         return fun(request, projects, count, page, *args, **kwargs)
     return inner
 
+
+@is_log_in
 @search
 def allproject(request, projects, count, page):
+    print(request.session.get('uuid'))
     obj = Pagination(count, page, "allproject.html")
     return render(request, 'web/all_projects.html', {'projects': projects, "count": count, 'obj': obj})
 
+@is_log_in
 @search
 def finish(request, projects, count, page):
     obj = Pagination(count, page, "finish.html")
     return render(request, 'web/finish.html', {'projects': projects, "count": count, 'obj': obj})
 
+
+@is_log_in
 @search
 def initial(request, projects, count, page):
     obj = Pagination(count, page, "initial.html")
     return render(request, 'web/initial.html', {'projects': projects, "count": count, 'obj': obj})
 
+@is_log_in
 @search
 def medium(request, projects, count, page):
     obj = Pagination(count, page, "medium.html")
     return render(request, 'web/medium.html', {'projects': projects, "count": count, 'obj': obj})
 
+@is_log_in
 @search
 def last(request, projects,  count, page):
     obj = Pagination(count, page, "last.html")

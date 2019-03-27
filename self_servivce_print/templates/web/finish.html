@@ -32,7 +32,7 @@
 
         <tr>
             <td>{{ proj.id }}</td>
-            <td>{{ proj.pro_name }}</td>
+            <td><a href="/see.html/?nid={{ proj.id }}">{{ proj.pro_name }}</a></td>
             {% if  proj.status == 4 %}
                 <td>完成</td>
             {% endif %}

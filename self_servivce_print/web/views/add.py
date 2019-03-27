@@ -3,8 +3,10 @@ from web.models import Project, Time, Content
 from web import form
 import datetime
 import json
+from web.is_log_in import is_log_in
 
 
+@is_log_in
 def add(request):
     if request.method == "GET":
         obj = form.Add_Form()
@@ -24,6 +26,5 @@ def add(request):
             Content.objects.create(content=content, comments=comments, PC_id=p.id)
             Time.objects.create(add_time=T, PT_id=p.id)
         else:
-            print('===========================')
             ret['msg'] = obj.errors
         return HttpResponse(json.dumps(ret))

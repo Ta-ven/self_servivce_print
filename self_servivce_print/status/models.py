@@ -7,7 +7,7 @@ class User(models.Model):
     username = models.CharField(max_length=32)
     password = models.CharField(max_length=11)
     email = models.EmailField(max_length=32)
-    UD = models.OneToOneField("Department", on_delete=models.CASCADE)
+    UD = models.ForeignKey("Department", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.username

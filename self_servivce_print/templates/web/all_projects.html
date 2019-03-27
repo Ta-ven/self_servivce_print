@@ -34,7 +34,7 @@
     {% for proj in projects %}
         <tr>
             <td>{{ proj.id }}</td>
-            <td><a href="">{{ proj.pro_name }}</a></td>
+            <td><a href="/see.html/?nid={{ proj.id }}">{{ proj.pro_name }}</a></td>
             {% if  proj.status == 4 %}
                 <td>完成</td>
             {% elif  proj.status == 1 %}

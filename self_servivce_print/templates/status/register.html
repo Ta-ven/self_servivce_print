@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>天川项目管理系统</title>
+    <link rel="stylesheet" href="/statics/login/css/style.css">
+    <style>
+        .right{
+            left: 174px;
+            height: 500px;
+            top: -60px
+        }
+        input{
+            border: 1px white solid;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dowebok">
+        <div class="container">
+            <div class="right">
+                <span style="color: red;margin-left: 40px;margin-top: 10px" id="err"></span>
+                <div class="form" style="margin-top: 0">
+                    <form id="form" method="post">
+                        {% csrf_token %}
+                        <label>用户名 <span style="color: red;" id="username"></span></label>
+                        <input type="text" name="username" >
+                        <label>电子邮件 <span style="color: red;" id="email"></span></label>
+                        <input type="text" name="email">
+                        <label>密码 <span style="color: red;" id="password1"></span></label>
+                        <input type="password"  name="password1">
+                        <label >确认密码 <span style="color: red;" id="password2"></span></label>
+                        <input type="password"  name="password2">
+                        <label>工号 <span style="color: red;" id="department"></span></label>
+                        <input type="text" name="department">
+                    </form>
+                    <input type="submit" id="submit" value="注册" onclick="register()">
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="/statics/js/jquery-3.3.1.min.js"></script>
+<script src="/statics/login/js/anime.min.js"></script>
+<script>
+    function register() {
+        $.ajaxSetup({
+          data:{csrfmiddlewaretoken:'{{ csrf_token }}'},
+            });
+              $.ajax({
+                url:"/register.html/",
+                type:'POST',
+                dataType:"JSON",
+                data:$('#form').serialize(),
+                success:function (args) {
+                  if (args.status == true){
+                        window.location.href='/login.html/'
+                  }else {
+                     if (args.msg.__all__){$('#err').text(args.msg.__all__[0])}
+                    if (args.msg.username){$('#username').text(args.msg.username[0])}
+                    if (args.msg.email){$('#email').text(args.msg.email[0])}
+                    if (args.msg.password1){$('#password1').text(args.msg.password1[0])}
+                    if (args.msg.password2){$('#password2').text(args.msg.password2[0])}
+                    if (args.msg.department){$('#department').text(args.msg.department[0])}
+                  }
+        }})
+    }
+</script>
+</body>
+</html>

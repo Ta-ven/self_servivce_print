@@ -78,10 +78,14 @@ WSGI_APPLICATION = 'self_servivce_print.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'self_server_print',    #你的数据库名称
+        'USER': 'root',   #你的数据库用户名
+        'PASSWORD': 'fsw.1996', #你的数据库密码
+        'HOST': '127.0.0.1', #你的数据库主机，留空默认为localhost
+        'PORT': '3306', #你的数据库端口
     }
-}
+  }
 
 
 # Password validation
@@ -115,6 +119,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
 # Static files (CSS, JavaScript, Images)

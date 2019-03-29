@@ -37,7 +37,6 @@ class Reg_Form(Form):
             raise ValidationError('两次密码不一样', 'invalid')
 
 def login(request):
-    print(request.POST)
     if request.method == "GET":
         return render(request, 'status/login.html')
     else:
@@ -70,11 +69,9 @@ def register(request):
             email = request.POST.get('email')
             department = request.POST.get('department')
             nid = Department.objects.filter(department=department)[0].id
-            print(username, password2, email, department, sep='\t')
             User.objects.create(username=username, password=password2, email=email, UD_id=nid)
         else:
             ret['msg'] = obj.errors
-            print(obj.errors)
         return HttpResponse(json.dumps(ret))
 
 
